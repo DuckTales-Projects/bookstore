@@ -1,0 +1,21 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+   - 'rubocop-performance'
+   - 'rubocop-rails'
+   - 'rubocop-rspec'
+
+AllCops:
+   NewCops: enable
+   Exclude:
+      - 'bin/**/*'
+      - 'vendor/**/*'
+      - 'db/**/*'
+      - 'config/**/*'
+      - 'spec/rails_helper.rb'
+      - 'Rakefile'
+   TargetRailsVersion: 7.0
+   TargetRubyVersion: 3.1.0
+
+Style/Documentation:
+  Enabled: false
