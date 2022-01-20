@@ -13,6 +13,8 @@ gem 'faker', { git: 'https://github.com/faker-ruby/faker.git', branch: 'master' 
 
 gem 'pg'
 
+gem 'pry-byebug'
+
 gem 'puma'
 
 gem 'rails', github: 'rails/rails', branch: 'main'
@@ -24,6 +26,8 @@ gem 'rubocop-performance'
 gem 'rubocop-rails'
 
 gem 'rubocop-rspec', require: false
+
+gem 'shoulda-matchers'
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
