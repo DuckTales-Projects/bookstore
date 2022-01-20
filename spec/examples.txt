@@ -1,8 +1,0 @@
-example_id                           | status | run_time        |
------------------------------------- | ------ | --------------- |
-./spec/models/author_spec.rb[1:1]    | passed | 0.00138 seconds |
-./spec/models/author_spec.rb[1:2]    | passed | 0.00536 seconds |
-./spec/models/book_spec.rb[1:1]      | passed | 0.00486 seconds |
-./spec/models/book_spec.rb[1:2]      | passed | 0.01146 seconds |
-./spec/models/publisher_spec.rb[1:1] | passed | 0.00182 seconds |
-./spec/models/publisher_spec.rb[1:2] | passed | 0.03529 seconds |
