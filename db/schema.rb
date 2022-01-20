@@ -34,4 +34,10 @@ ActiveRecord::Schema.define(version: 2022_01_19_003241) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "publishers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
 end
