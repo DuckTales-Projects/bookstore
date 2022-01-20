@@ -17,3 +17,6 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+RSpec/ExampleLength:
+  Max: 20
