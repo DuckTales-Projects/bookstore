@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 649dd8ff7258d802d695dad315fd475f4dd59f96
+  revision: a9a99d2212c4207d5d1eed81fd959892b40978d4
   branch: master
   specs:
     faker (2.19.0)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 0638d35a7870663a84dcd2c3ed6edb696397043c
+  revision: 8b2511b8ff28bc991ec459d798b8296195b423a3
   branch: main
   specs:
     actioncable (7.1.0.alpha)
@@ -108,7 +108,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-expectations.git
-  revision: cb8aba3af220e7fb8980f05c1f56f51105a05f3e
+  revision: a91e8129d15fb38bdf3aeeb0ee5cb59d3dd56d64
   branch: main
   specs:
     rspec-expectations (3.11.0.pre)
@@ -126,7 +126,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-rails.git
-  revision: cef194e2d8b269632afa4f87d41033fb31600b7f
+  revision: fac29a12e1b35dfab41acd72c1e88aa35397ce98
   branch: main
   specs:
     rspec-rails (5.1.0.pre)
@@ -149,8 +149,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
-    bootsnap (1.9.4)
-      msgpack (~> 1.0)
+    bootsnap (1.10.1)
+      msgpack (~> 1.2)
     builder (3.2.4)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
@@ -196,7 +196,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.0-x86_64-linux)
+    nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (3.1.0.0)
@@ -230,10 +230,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.15.1)
       parser (>= 3.0.1.1)
-    rubocop-performance (1.13.1)
+    rubocop-performance (1.13.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.13.1)
+    rubocop-rails (2.13.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
