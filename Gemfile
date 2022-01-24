@@ -7,10 +7,6 @@ ruby '3.1.0'
 
 gem 'bootsnap', require: false
 
-gem 'factory_bot'
-
-gem 'faker', { git: 'https://github.com/faker-ruby/faker.git', branch: 'master' }
-
 gem 'pg'
 
 gem 'puma'
@@ -28,6 +24,8 @@ gem 'rubocop-rspec', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
+  gem 'faker', { git: 'https://github.com/faker-ruby/faker.git', branch: 'master' }
+  gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'shoulda-matchers'
   %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
