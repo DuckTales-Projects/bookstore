@@ -156,22 +156,19 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
-    debug (1.4.0)
-      irb (>= 1.3.6)
-      reline (>= 0.2.7)
     diff-lcs (1.5.0)
     digest (3.1.0)
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
-    io-console (0.5.11)
     io-wait (0.2.1)
-    irb (1.4.1)
-      reline (>= 0.3.0)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -224,8 +221,6 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.2.0)
-    reline (0.3.1)
-      io-console (~> 0.5)
     rexml (3.2.5)
     rubocop (1.24.1)
       parallel (~> 1.10)
@@ -266,8 +261,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  debug
-  factory_bot
+  factory_bot_rails
   faker!
   pg
   pry-byebug
