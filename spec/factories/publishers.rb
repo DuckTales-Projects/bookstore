@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :publisher do
-    name { 'MyString' }
+    name { Faker::Company.name }
   end
 end
