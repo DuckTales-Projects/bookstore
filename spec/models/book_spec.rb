@@ -17,27 +17,24 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_presence_of(:year) }
   end
 
-  context 'when the book have the default attributes' do
+  context 'when the book has the default attributes' do
     it { expect(default).to be_valid }
 
     it 'must be valid' do
       default.language = :spanish
-      book = default
-      expect(book).to be_valid
+      expect(default).to be_valid
     end
   end
 
   context 'when the book does not have the default attributes' do
     it 'not to be valid' do
       default.language = nil
-      book = default
-      expect(book).not_to be_valid
+      expect(default).not_to be_valid
     end
 
     it 'must not save the book' do
       default.language = nil
-      book = default
-      expect(book.save).to be false
+      expect(default.save).to be false
     end
   end
 end
