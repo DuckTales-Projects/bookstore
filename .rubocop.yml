@@ -18,6 +18,8 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+RSpec/MultipleExpectations:
+  Enabled: false
 RSpec/ExampleLength:
   Max: 20
 
