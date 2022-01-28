@@ -10,6 +10,7 @@ RSpec.describe Author, type: :model do
   end
 
   context 'with relationships' do
+    it { is_expected.to have_many(:publishers).through(:books) }
     it { is_expected.to have_many(:books).dependent(:destroy) }
   end
 
