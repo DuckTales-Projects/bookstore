@@ -6,10 +6,9 @@ RSpec.describe Book, type: :model do
   subject(:book) { build(:book) }
 
   context 'with shoulda-matchers validations' do
+    it { is_expected.to belong_to(:author) and belong_to(:publisher) }
     it { is_expected.to define_enum_for(:language).with_values(portuguese: 0, english: 1, spanish: 2) }
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_presence_of(:author) }
-    it { is_expected.to validate_presence_of(:publisher) }
     it { is_expected.to validate_presence_of(:genre) }
     it { is_expected.to validate_presence_of(:language) }
     it { is_expected.to validate_presence_of(:edition) }
