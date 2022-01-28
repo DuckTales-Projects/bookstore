@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/faker-ruby/faker.git
-  revision: a9a99d2212c4207d5d1eed81fd959892b40978d4
-  branch: master
-  specs:
-    faker (2.19.0)
-      i18n (>= 1.8.11, < 2)
-
-GIT
   remote: https://github.com/rails/rails.git
   revision: 8b2511b8ff28bc991ec459d798b8296195b423a3
   branch: main
@@ -164,6 +156,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.8.11)
@@ -262,7 +256,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   factory_bot_rails
-  faker!
+  faker
   pg
   pry-byebug
   puma
