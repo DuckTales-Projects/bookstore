@@ -5,8 +5,7 @@ require 'rails_helper'
 RSpec.describe Book, type: :model do
   subject(:book) { build(:book) }
 
-  context 'with shoulda-matchers validations' do
-    it { is_expected.to belong_to(:author) and belong_to(:publisher) }
+  context 'with validations' do
     it { is_expected.to define_enum_for(:language).with_values(portuguese: 0, english: 1, spanish: 2) }
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:genre) }
@@ -14,7 +13,11 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_presence_of(:edition) }
     it { is_expected.to validate_presence_of(:place) }
     it { is_expected.to validate_presence_of(:year) }
-    # add year new validations tests
+  end
+
+  context 'with relationships' do
+    it { is_expected.to belong_to(:author) }
+    it { is_expected.to belong_to(:publisher) }
   end
 
   context 'when the book has the default attributes' do
