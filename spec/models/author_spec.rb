@@ -5,8 +5,11 @@ require 'rails_helper'
 RSpec.describe Author, type: :model do
   subject(:author) { build(:author) }
 
-  context 'with shoulda-matchers validations' do
+  context 'with validations' do
     it { is_expected.to validate_presence_of(:name) }
+  end
+
+  context 'with relationships' do
     it { is_expected.to have_many(:books).dependent(:destroy) }
   end
 
