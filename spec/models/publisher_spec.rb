@@ -7,6 +7,7 @@ RSpec.describe Publisher, type: :model do
 
   context 'with shoulda-matchers validations' do
     it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to have_many(:books).dependent(:destroy) }
   end
 
   context 'when the publisher has the default attributes' do
