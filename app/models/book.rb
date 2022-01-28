@@ -1,17 +1,19 @@
 # frozen_string_literal:true
 
 class Book < ApplicationRecord
-  enum language: {
-    portuguese: 0,
-    english: 1,
-    spanish: 2
-  }
+  belongs_to :author
+  belongs_to :publisher
+
   validates :title,
-            :author,
-            :publisher,
             :genre,
             :language,
             :edition,
             :place,
             :year, presence: true
+
+  enum language: {
+    portuguese: 0,
+    english: 1,
+    spanish: 2
+  }
 end
