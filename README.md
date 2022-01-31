@@ -1,24 +1,42 @@
-# README
+# FA_library
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The objective of this project is to test my knowledge, it is an API where it is possible to register and consult a list of books, authors and publishers.
 
-Things you may want to cover:
+## System dependencies
 
-* Ruby version
+```markdown
+* Ruby version      - version 3.1.0
+* Rails version     - version 7.1.0.alpha
+* RSpec version     - version 3.11.0.pre
+* Rubocop version   - version 1.24.1
+```
+## Usage
 
-* System dependencies
+clone this project:
 
-* Configuration
+```sh
+git clone https://github.com/DuckTales-Projects/FA_library.git
 
-* Database creation
+cd FA_library
 
-* Database initialization
+gem install bundler         # => install bundler
 
-* How to run the test suite
+bundle install              # => install project dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+bin/rails db:create db:migrate   # => prepare the database
 
-* Deployment instructions
+bin/rails s                     # => start server
 
-* ...
+bin/rails c                     # => start console
+
+bundle exec rspec           # => to run the tests
+```
+start the server and access the url: http://localhost:3000
+
+<hr>
+
+## future updates
+
+```markdown
+- the api will be able to listen for http calls, process and return a json
+```
