@@ -5,7 +5,6 @@ require 'codecov'
 
 SimpleCov.start do
   enable_coverage :branch
-  # SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
 require 'spec_helper'
