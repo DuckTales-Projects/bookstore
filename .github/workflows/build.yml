@@ -1,8 +1,5 @@
 name: Build
 on:
-  push:
-    branches: [development, main]
-
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -10,8 +7,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
+      - name: checkout repository
       - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
 
       - name: Codecov
         coverage:
@@ -19,14 +22,10 @@ jobs:
             patch:
               default:
                 target: 100%
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+        with:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:
-          fetch-depth: 0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
