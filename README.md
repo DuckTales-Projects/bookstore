@@ -1,4 +1,4 @@
-# FA_library
+# First API: Library
 
 The objective of this project is to test my knowledge, it is an API where it is possible to register and consult a list of books, authors and publishers.
 
