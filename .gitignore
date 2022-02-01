@@ -15,6 +15,9 @@
 /.bundle
 /vendor
 
+# Ignore coverage
+coverage
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
