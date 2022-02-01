@@ -1,0 +1,479 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/jhonny/Workspace/projects/FA_library/config/environment.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/application.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/boot.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/environments/test.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/initializers/cors.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/initializers/filter_parameter_logging.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/initializers/inflections.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/initializers/new_framework_defaults_7_1.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/spec/factories/authors.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          18,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/spec/factories/books.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          13,
+          1,
+          1,
+          13,
+          13,
+          13,
+          13,
+          13,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/spec/factories/publishers.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          18,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/config/routes.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/spec/support/factory_bot.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/spec/support/shoulda_matchers.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/app/models/author.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/spec/models/book_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          13,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/app/models/book.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/spec/models/publisher_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          6,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "/home/jhonny/Workspace/projects/FA_library/app/models/publisher.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ],
+        "branches": {
+        }
+      }
+    },
+    "timestamp": 1643736963
+  }
+}
