@@ -18,6 +18,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+  rubocop:
+    runs-on: ubuntu-latest
+    name: Rubocop
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Rubocop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bundle exec rubocop --config .rubocop.yml
+
   codecov:
     runs-on: ubuntu-latest
     name: Codecov
