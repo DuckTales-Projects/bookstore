@@ -1,0 +1,34 @@
+name: code_analyzers
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+
+  sonarcloud:
+    runs-on: ubuntu-latest
+    name: SonarCloud
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  codecov:
+    runs-on: ubuntu-latest
+    name: Codecov
+    steps:
+      - uses: actions/checkout@v2
+      - name: covarege check
+        coverage:
+                  status:
+                    patch:
+                      default:
+                        target: 100%
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
