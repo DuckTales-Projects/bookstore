@@ -6,21 +6,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.0'
 
 gem 'bootsnap', require: false
-
+gem 'dotenv-rails'
 gem 'pg'
-
 gem 'puma'
-
 gem 'rails', github: 'rails/rails', branch: 'main'
-
 gem 'rubocop', require: false
-
 gem 'rubocop-performance'
-
 gem 'rubocop-rails'
-
 gem 'rubocop-rspec', require: false
-
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
