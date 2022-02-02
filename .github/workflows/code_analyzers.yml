@@ -4,40 +4,22 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-
-  sonarcloud:
+  code_analyzers:
     runs-on: ubuntu-latest
-    name: SonarCloud
+
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  rubocop:
-    runs-on: ubuntu-latest
-    name: Rubocop
-    steps:
-      - name: Run Rubocop
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bundle exec rubocop --config .rubocop.yml
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+         bundler-cache: true
 
-  codecov:
-    runs-on: ubuntu-latest
-    name: Codecov
-    steps:
-      - uses: actions/checkout@v2
-      - name: covarege check
-        coverage:
-                  status:
-                    patch:
-                      default:
-                        target: 100%
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Run Rubocop
+        run: bundle exec rubocop --config .rubocop.yml
