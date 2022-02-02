@@ -16,7 +16,7 @@
 /vendor
 
 # Ignore coverage
-coverage
+/coverage
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -38,3 +38,6 @@ coverage
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore env
+.env
