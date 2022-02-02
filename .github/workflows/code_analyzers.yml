@@ -22,7 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Rubocop
     steps:
-      - uses: actions/checkout@v2
       - name: Run Rubocop
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
