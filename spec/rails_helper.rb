@@ -5,6 +5,8 @@ require 'codecov'
 
 SimpleCov.start do
   enable_coverage :branch
+  minimum_coverage 90
+  maximum_coverage_drop 2
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
