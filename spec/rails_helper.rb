@@ -18,7 +18,7 @@ SimpleCov.start 'rails' do
   minimum_coverage line: 90, branch: 80
   maximum_coverage_drop 2
 
-  # SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
 require 'spec_helper'
