@@ -4,9 +4,6 @@ require 'simplecov'
 require 'codecov'
 
 SimpleCov.start 'rails' do
-  add_filter '/spec/'
-  add_filter '/helper/'
-  add_filter '/config/'
   add_filter '/app/channels/'
   add_filter '/app/jobs/'
   add_filter '/app/mailers/'
@@ -21,7 +18,7 @@ SimpleCov.start 'rails' do
   minimum_coverage line: 90, branch: 80
   maximum_coverage_drop 2
 
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  # SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
 require 'spec_helper'
