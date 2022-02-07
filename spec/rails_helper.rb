@@ -11,6 +11,7 @@ SimpleCov.start 'rails' do
   add_filter '/app/jobs/'
   add_filter '/app/mailers/'
   add_filter '/app/controllers/' #temporary filter
+
   add_group 'Models', 'app/models'
   add_group 'Controllers', 'app/controllers'
 
