@@ -32,5 +32,31 @@ RSpec.describe 'Books', type: :request do
       end
     end
   end
+
+  describe 'GET #show' do
+    context 'when there is a book' do
+      let(:my_book) { create(:book) }
+
+      before { get book_path(my_book.id) }
+
+      it 'return my book' do
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['title']).to eq my_book.title
+        expect(JSON(response.body)['id']).to eq my_book.id
+      end
+    end
+
+    context 'when there is no book' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+
+      before { get book_path(invalid_id) }
+
+      it 'is not to be found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq "Couldnt find Book with id=#{invalid_id}"
+      end
+    end
+  end
+  end
   end
 end
