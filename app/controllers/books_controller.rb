@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :filter, only: %i[show]
+  before_action :filter, only: %i[show update]
   before_action :params_missing?, only: %i[create]
-  before_action :valid_params?, only: %i[create]
+  before_action :valid_params?, only: %i[create update]
 
   def index
     @books = Book.all
@@ -21,6 +21,13 @@ class BooksController < ApplicationController
     @book = Book.create(book_params)
 
     render json: @book, status: :created
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update(book_params)
+
+    render json: @book, status: :ok
   end
   private
 
