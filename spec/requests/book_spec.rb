@@ -57,6 +57,51 @@ RSpec.describe 'Books', type: :request do
       end
     end
   end
+
+  describe 'POST #create' do
+    let(:author) { create(:author) }
+    let(:publisher) { create(:publisher) }
+
+    context 'when creating' do
+      let(:attributes) do
+        {
+          book: attributes_for(
+            :book,
+            author_id: author.id,
+            publisher_id: publisher.id
+          )
+        }
+      end
+
+      before { post books_path, params: attributes }
+
+      it 'must return my book' do
+        expect(response).to have_http_status :created
+        expect(JSON(response.body)['title']).to eq attributes.values[0].values[0]
+        expect(JSON(response.body)['genre']).to eq attributes.values[0].values[1]
+      end
+    end
+
+    context 'when creating with invalid attributes' do
+      let(:invalid_attributes) { { book: attributes_for(:book, author_id: nil, publisher_id: nil) } }
+
+      before { post books_path, params: invalid_attributes }
+
+      it 'invalid or null parameters' do
+        expect(response).to have_http_status :unprocessable_entity
+        expect(JSON(response.body)['message']).to eq 'invalid or null parameters'
+      end
+    end
+
+    context 'when creating with empty attributes' do
+      before { post books_path, params: {} }
+
+      it 'bad request' do
+        expect(response).to have_http_status :bad_request
+        expect(JSON(response.body)['message']).to eq 'invalid or null parameters'
+      end
+    end
+  end
   end
   end
 end
