@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :filter, only: %i[show update]
+  before_action :filter, only: %i[show update destroy]
   before_action :params_missing?, only: %i[create]
   before_action :valid_params?, only: %i[create update]
 
@@ -29,6 +29,13 @@ class BooksController < ApplicationController
 
     render json: @book, status: :ok
   end
+
+  def destroy
+    @book = Book.find(params[:id]).destroy
+
+    render json: { message: "#{@book.title} is deleted" }, status: :ok
+  end
+
   private
 
   def filter
