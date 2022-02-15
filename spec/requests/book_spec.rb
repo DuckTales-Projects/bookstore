@@ -138,5 +138,28 @@ RSpec.describe 'Books', type: :request do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    context 'when book exist' do
+      let(:my_book) { create(:book) }
+
+      before { delete book_path(my_book.id) }
+
+      it 'delete my book' do
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['message']).to eq "#{my_book.title} is deleted"
+      end
+    end
+
+    context 'when book not exist' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+
+      before { delete book_path(invalid_id) }
+
+      it 'is not to be found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq "Couldnt find Book with id=#{invalid_id}"
+      end
+    end
   end
 end
