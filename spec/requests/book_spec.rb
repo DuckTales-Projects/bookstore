@@ -102,6 +102,41 @@ RSpec.describe 'Books', type: :request do
       end
     end
   end
+
+  describe 'PUT #update' do
+    let(:attributes) { { book: attributes_for(:book) } }
+    let(:my_book) { create(:book) }
+
+    context 'when book exist' do
+      before { put book_path(my_book.id), params: attributes }
+
+      it 'uptade book' do
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['title']).to eq attributes.values[0].values[0]
+      end
+    end
+
+    context 'when book not exist' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+
+      before { get book_path(invalid_id), params: attributes }
+
+      it 'is not to be found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq "Couldnt find Book with id=#{invalid_id}"
+      end
+    end
+
+    context 'when invalid attributes' do
+      let(:invalid_attributes) { { book: attributes_for(:book, title: nil) } }
+
+      before { put book_path(my_book.id), params: invalid_attributes }
+
+      it 'invalid or null parameters' do
+        expect(response).to have_http_status :unprocessable_entity
+        expect(JSON(response.body)['message']).to eq 'invalid or null parameters'
+      end
+    end
   end
   end
 end
