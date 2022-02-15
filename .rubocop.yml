@@ -9,9 +9,6 @@ AllCops:
     - 'bin/**/*'
     - 'vendor/**/*'
     - 'db/**/*'
-    - 'config/**/*'
-    - 'spec/rails_helper.rb'
-    - 'Rakefile'
   TargetRailsVersion: 7.0
   TargetRubyVersion: 3.1.0
 
@@ -25,3 +22,6 @@ RSpec/ExampleLength:
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'conxtet']
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
