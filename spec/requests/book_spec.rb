@@ -17,7 +17,7 @@ RSpec.describe 'Books', type: :request do
 
     context 'when has elements' do
       let(:books) { create_list(:book, 9) }
-      let(:my_book) { create(:book, title: Faker::Book.title) }
+      let(:my_book) { create(:book) }
 
       before do
         books
