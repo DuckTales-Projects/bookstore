@@ -145,6 +145,15 @@ RSpec.describe 'Books', type: :request do
         expect(JSON(response.body)['message']).to eq message
       end
     end
+
+    context 'when creating with empty attributes' do
+      before { put book_path(my_book.id), params: {} }
+
+      it 'is a bad request' do
+        expect(response).to have_http_status :bad_request
+        expect(JSON(response.body)['message']).to eq 'param is missing or the value is empty: book'
+      end
+    end
   end
 
   describe 'DELETE /books/:id' do
