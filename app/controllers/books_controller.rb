@@ -21,9 +21,9 @@ class BooksController < ApplicationController
 
   def update
     Book.find(params[:id]).then do |book|
-      book.update!(book_params)
-
-      render json: book, status: :ok
+      book.update!(book_params).then do |result|
+        render json: result, status: :no_content
+      end
     end
   end
 

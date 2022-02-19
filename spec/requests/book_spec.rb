@@ -9,7 +9,7 @@ RSpec.describe 'Books', type: :request do
     context 'when has no books' do
       before { get_index }
 
-      it 'must empty JSON' do
+      it 'must return a empty JSON' do
         expect(response).to have_http_status :ok
         expect(JSON(response.body).empty?).to eq true
       end
@@ -25,7 +25,7 @@ RSpec.describe 'Books', type: :request do
         get_index
       end
 
-      it 'return all books' do
+      it 'returns all the books' do
         expect(response).to have_http_status :ok
         expect(JSON.parse(response.body).size).to eq 10
         expect(JSON.parse(response.body).last['title']).to eq 'crash'
@@ -57,7 +57,7 @@ RSpec.describe 'Books', type: :request do
 
       before { get book_path(invalid_id) }
 
-      it 'is not to be found' do
+      it 'is not found' do
         expect(response).to have_http_status :not_found
         expect(JSON(response.body)['message']).to eq message
       end
@@ -93,7 +93,7 @@ RSpec.describe 'Books', type: :request do
 
       before { post books_path, params: invalid_attributes }
 
-      it 'invalid parameters' do
+      it 'is a unprocessable entity' do
         expect(response).to have_http_status :unprocessable_entity
         expect(JSON(response.body)['message']).to eq 'Validation failed: Author must exist, Publisher must exist'
       end
@@ -102,7 +102,7 @@ RSpec.describe 'Books', type: :request do
     context 'when creating with empty attributes' do
       before { post books_path, params: {} }
 
-      it 'bad request' do
+      it 'is a bad request' do
         expect(response).to have_http_status :bad_request
         expect(JSON(response.body)['message']).to eq 'param is missing or the value is empty: book'
       end
@@ -116,9 +116,11 @@ RSpec.describe 'Books', type: :request do
     context 'when book exist' do
       before { put book_path(my_book.id), params: params }
 
-      it 'uptade book' do
-        expect(response).to have_http_status :ok
-        expect(JSON(response.body)['title']).to eq '1984'
+      it 'updates the book' do
+        my_book.reload
+
+        expect(response).to have_http_status :no_content
+        expect(my_book.title).to eq '1984'
       end
     end
 
@@ -128,7 +130,7 @@ RSpec.describe 'Books', type: :request do
 
       before { get book_path(invalid_id), params: params }
 
-      it 'is not to be found' do
+      it 'is not found' do
         expect(response).to have_http_status :not_found
         expect(JSON(response.body)['message']).to eq message
       end
@@ -140,7 +142,7 @@ RSpec.describe 'Books', type: :request do
 
       before { put book_path(my_book.id), params: invalid_attributes }
 
-      it 'invalid parameters' do
+      it 'is a unprocessable entity' do
         expect(response).to have_http_status :unprocessable_entity
         expect(JSON(response.body)['message']).to eq message
       end
@@ -174,7 +176,7 @@ RSpec.describe 'Books', type: :request do
 
       before { delete book_path(invalid_id) }
 
-      it 'is not to be found' do
+      it 'is not found' do
         expect(response).to have_http_status :not_found
         expect(JSON(response.body)['message']).to eq message
       end
