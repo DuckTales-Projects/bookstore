@@ -12,4 +12,16 @@ class AuthorsController < ApplicationController
       render json: author, status: :ok
     end
   end
+
+  def create
+    Author.create!(author_params).then do |author|
+      render json: author, status: :created
+    end
+  end
+
+  private
+
+  def author_params
+    params.require(:author).permit(:name)
+  end
 end
