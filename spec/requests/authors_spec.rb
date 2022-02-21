@@ -32,4 +32,29 @@ RSpec.describe 'Authors', type: :request do
       end
     end
   end
+
+  describe 'GET /authors/:id' do
+    context 'when authors exist' do
+      let(:author) { create(:author, name: 'Alexandre Versignassi') }
+
+      before { get author_path(author.id) }
+
+      it 'returns the author' do
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['name']).to eq 'Alexandre Versignassi'
+      end
+    end
+
+    context 'when authors not exist' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Author with 'id'=#{invalid_id}" }
+
+      before { get author_path(invalid_id) }
+
+      it 'is not found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+  end
 end
