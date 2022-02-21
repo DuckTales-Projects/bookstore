@@ -19,6 +19,14 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def update
+    Author.find(params[:id]).then do |author|
+      author.update!(author_params).then do |result|
+        render json: result, status: :no_content
+      end
+    end
+  end
+
   private
 
   def author_params
