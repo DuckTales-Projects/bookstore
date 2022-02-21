@@ -57,4 +57,38 @@ RSpec.describe 'Authors', type: :request do
       end
     end
   end
+
+  describe 'POST /books' do
+    context 'when creating a new author' do
+      let(:params) { { author: attributes_for(:author) } }
+
+      before { post authors_path, params: params }
+
+      it 'must return author' do
+        expect(response).to have_http_status :created
+        expect(JSON(response.body)['name']).to eq params.values[0].values[0]
+      end
+    end
+
+    context 'when creating a new author with invalid attributes' do
+      let(:invalid_attributes) { { author: attributes_for(:author, name: nil) } }
+      let(:message) { "Validation failed: Name can't be blank" }
+
+      before { post authors_path, params: invalid_attributes }
+
+      it 'is a unprocessable entity' do
+        expect(response).to have_http_status :unprocessable_entity
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+
+    context 'when creating a new author with invalid params' do
+      before { post authors_path, params: {} }
+
+      it 'is a bad request' do
+        expect(response).to have_http_status :bad_request
+        expect(JSON(response.body)['message']).to eq 'param is missing or the value is empty: author'
+      end
+    end
+  end
 end
