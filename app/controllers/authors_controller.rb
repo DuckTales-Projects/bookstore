@@ -6,4 +6,10 @@ class AuthorsController < ApplicationController
       render json: author, status: :ok
     end
   end
+
+  def show
+    Author.find(params[:id]).then do |author|
+      render json: author, status: :ok
+    end
+  end
 end
