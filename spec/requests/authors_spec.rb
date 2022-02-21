@@ -58,7 +58,7 @@ RSpec.describe 'Authors', type: :request do
     end
   end
 
-  describe 'POST /books' do
+  describe 'POST /authors' do
     context 'when creating a new author' do
       let(:params) { { author: attributes_for(:author) } }
 
@@ -71,7 +71,7 @@ RSpec.describe 'Authors', type: :request do
     end
 
     context 'when creating a new author with invalid attributes' do
-      let(:invalid_attributes) { { author: attributes_for(:author, name: nil) } }
+      let(:invalid_attributes) { { author: { name: nil } } }
       let(:message) { "Validation failed: Name can't be blank" }
 
       before { post authors_path, params: invalid_attributes }
