@@ -142,4 +142,29 @@ RSpec.describe 'Authors', type: :request do
       end
     end
   end
+
+  describe 'DELETE /authors/:id' do
+    context 'when author exist' do
+      let(:author) { create(:author) }
+
+      before { delete author_path(author.id) }
+
+      it 'delete the author' do
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['message']).to eq "#{author.name} was deleted"
+      end
+    end
+
+    context 'when the author does not exist' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Author with 'id'=#{invalid_id}" }
+
+      before { delete author_path(invalid_id) }
+
+      it 'is not found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+  end
 end
