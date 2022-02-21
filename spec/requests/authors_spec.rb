@@ -91,4 +91,55 @@ RSpec.describe 'Authors', type: :request do
       end
     end
   end
+
+  describe 'PUT /authors/:id' do
+    let(:params) { { author: { name: 'George Orwell' } } }
+    let(:author) { create(:author) }
+
+    context 'when authors exists' do
+      before { put author_path(author.id), params: params }
+
+      it 'updates the author' do
+        author.reload
+
+        expect(response).to have_http_status :no_content
+        expect(author.name).to eq 'George Orwell'
+      end
+    end
+
+    context 'when authors does not exist' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Author with 'id'=#{invalid_id}" }
+
+      before { put author_path(invalid_id), params: params }
+
+      it 'is not found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+
+    context 'with invalid params' do
+      let(:message) { 'param is missing or the value is empty: author' }
+
+      before { put author_path(author.id), params: {} }
+
+      it 'is a bad request' do
+        expect(response).to have_http_status :bad_request
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+
+    context 'with invalid attributes' do
+      let(:invalid_attributes) { { author: { name: nil } } }
+      let(:message) { "Validation failed: Name can't be blank" }
+
+      before { put author_path(author.id), params: invalid_attributes }
+
+      it 'ia a unprocessable entity' do
+        expect(response).to have_http_status :unprocessable_entity
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+  end
 end
