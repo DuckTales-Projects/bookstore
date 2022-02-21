@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Authors', type: :request do
-  describe 'GET /index' do
+  describe 'GET /authors' do
     subject(:get_index) { get authors_path }
 
     context 'when author exist' do
-      let(:author) { create(:author) }
+      let(:author) { create(:author, name: 'Dan Brown') }
       let(:list) { create_list(:author, 9) }
 
       before do
@@ -16,17 +16,17 @@ RSpec.describe 'Authors', type: :request do
         get_index
       end
 
-      it 'return all authors' do
+      it 'returns all the authors' do
         expect(response).to have_http_status :ok
         expect(JSON.parse(response.body).size).to eq 10
-        expect(JSON.parse(response.body).first['name']).to eq author.name
+        expect(JSON.parse(response.body).first['name']).to eq 'Dan Brown'
       end
     end
 
     context 'when author not exist' do
       before { get_index }
 
-      it 'empty response' do
+      it 'must return a empty JSON' do
         expect(response).to have_http_status :ok
         expect(JSON(response.body).empty?).to eq true
       end
