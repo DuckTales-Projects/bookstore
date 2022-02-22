@@ -3,5 +3,5 @@
 Rails.application.routes.draw do
   resources :books, only: %i[index show create update destroy]
   resources :authors, only: %i[index show create update destroy]
-  resources :publishers, only: %i[index show]
+  resources :publishers, only: %i[index show create]
 end
