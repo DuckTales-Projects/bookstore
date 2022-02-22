@@ -99,4 +99,55 @@ RSpec.describe 'Publishers', type: :request do
       end
     end
   end
+
+  describe 'PUT /publishers/:id' do
+    let(:publisher) { create(:publisher, name: 'Bertelsmann') }
+    let(:params) { { publisher: { name: 'ThomsonReuters' } } }
+
+    context 'when the publisher exists' do
+      before { put publisher_path(publisher.id), params: params }
+
+      it 'updates the publisher' do
+        publisher.reload
+
+        expect(response).to have_http_status :no_content
+        expect(publisher.name).to eq 'ThomsonReuters'
+      end
+    end
+
+    context 'when the publisher does not exist' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Publisher with 'id'=#{invalid_id}" }
+
+      before { put publisher_path(invalid_id), params: params }
+
+      it 'is not found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+
+    context 'with invalid params' do
+      let(:message) { 'param is missing or the value is empty: publisher' }
+
+      before { put publisher_path(publisher.id), params: {} }
+
+      it 'is a bad request' do
+        expect(response).to have_http_status :bad_request
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+
+    context 'with invalid attributes' do
+      let(:invalid_attributes) { { publisher: { name: nil } } }
+      let(:message) { "Validation failed: Name can't be blank" }
+
+      before { put publisher_path(publisher.id), params: invalid_attributes }
+
+      it 'is a unprocessable entity' do
+        expect(response).to have_http_status :unprocessable_entity
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+  end
 end
