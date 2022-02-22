@@ -19,6 +19,12 @@ class PublishersController < ApplicationController
     end
   end
 
+  def update
+    Publisher.find(params[:id]).update!(publisher_params).then do |publisher|
+      render json: publisher, status: :no_content
+    end
+  end
+
   private
 
   def publisher_params
