@@ -12,4 +12,16 @@ class PublishersController < ApplicationController
       render json: publisher, status: :ok
     end
   end
+
+  def create
+    Publisher.create!(publisher_params).then do |publisher|
+      render json: publisher, status: :created
+    end
+  end
+
+  private
+
+  def publisher_params
+    params.require(:publisher).permit!
+  end
 end
