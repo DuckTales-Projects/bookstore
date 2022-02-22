@@ -60,4 +60,40 @@ RSpec.describe 'Publishers', type: :request do
       end
     end
   end
+
+  describe 'POST /publisher' do
+    context 'when creating a publisher' do
+      let(:params) { { publisher: { name: 'Wolters Kluwer' } } }
+
+      before { post publishers_path, params: params }
+
+      it 'must return publisher' do
+        expect(response).to have_http_status :created
+        expect(JSON(response.body)['name']).to eq params.values[0].values[0]
+      end
+    end
+
+    context 'when creating a publisher with invalid params' do
+      let(:message) { 'param is missing or the value is empty: publisher' }
+
+      before { post publishers_path, params: {} }
+
+      it 'is a bad request' do
+        expect(response).to have_http_status :bad_request
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+
+    context 'when creating a publisher with invalid attibutes' do
+      let(:params) { { publisher: { name: nil } } }
+      let(:message) { "Validation failed: Name can't be blank" }
+
+      before { post publishers_path, params: params }
+
+      it 'is an unprocessable entity' do
+        expect(response).to have_http_status :unprocessable_entity
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+  end
 end
