@@ -154,4 +154,29 @@ RSpec.describe 'Publishers', type: :request do
       end
     end
   end
+
+  describe 'DELETE /publishers/:id' do
+    context 'when the publisher exists' do
+      let(:publisher) { create(:publisher, name: 'Bertelsmann') }
+
+      before { delete publisher_path(publisher.id) }
+
+      it 'delete the publisher' do
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['message']).to eq "#{publisher.name} was deleted"
+      end
+    end
+
+    context 'when the publisher does not exist' do
+      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Publisher with 'id'=#{invalid_id}" }
+
+      before { delete publisher_path(invalid_id) }
+
+      it 'is not found' do
+        expect(response).to have_http_status :not_found
+        expect(JSON(response.body)['message']).to eq message
+      end
+    end
+  end
 end
