@@ -25,6 +25,12 @@ class PublishersController < ApplicationController
     end
   end
 
+  def destroy
+    Publisher.find(params[:id]).destroy.then do |publisher|
+      render json: { message: "#{publisher.name} was deleted" }, status: :ok
+    end
+  end
+
   private
 
   def publisher_params
