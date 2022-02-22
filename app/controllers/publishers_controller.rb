@@ -6,4 +6,10 @@ class PublishersController < ApplicationController
       render json: publisher, status: :ok
     end
   end
+
+  def show
+    Publisher.find(params[:id]).then do |publisher|
+      render json: publisher, status: :ok
+    end
+  end
 end
