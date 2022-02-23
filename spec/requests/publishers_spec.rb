@@ -156,10 +156,13 @@ RSpec.describe 'Publishers', type: :request do
   end
 
   describe 'DELETE /publishers/:id' do
-    context 'when the publisher exists' do
-      let(:publisher) { create(:publisher, name: 'Bertelsmann') }
+    let(:publisher) { create(:publisher, name: 'Bertelsmann') }
+    let(:invalid_id) { Faker::Number.within(range: 900..1000) }
 
-      before { delete publisher_path(publisher.id) }
+    context 'when the publisher exists' do
+      subject(:delete_publisher) { delete publisher_path(publisher.id) }
+
+      before { delete_publisher }
 
       it 'delete the publisher' do
         expect(response).to have_http_status :ok
@@ -168,10 +171,11 @@ RSpec.describe 'Publishers', type: :request do
     end
 
     context 'when the publisher does not exist' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
+      subject(:delete_publisher) { delete publisher_path(invalid_id) }
+
       let(:message) { "Couldn't find Publisher with 'id'=#{invalid_id}" }
 
-      before { delete publisher_path(invalid_id) }
+      before { delete_publisher }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
