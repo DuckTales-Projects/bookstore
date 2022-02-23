@@ -101,11 +101,14 @@ RSpec.describe 'Publishers', type: :request do
   end
 
   describe 'PUT /publishers/:id' do
-    let(:publisher) { create(:publisher, name: 'Bertelsmann') }
+    subject(:update_publisher) { put publisher_path(id), params: params }
+
     let(:params) { { publisher: { name: 'ThomsonReuters' } } }
+    let(:publisher) { create(:publisher, name: 'Bertelsmann') }
+    let(:id) { publisher.id }
 
     context 'when the publisher exists' do
-      before { put publisher_path(publisher.id), params: params }
+      before { update_publisher }
 
       it 'updates the publisher' do
         publisher.reload
@@ -116,10 +119,10 @@ RSpec.describe 'Publishers', type: :request do
     end
 
     context 'when the publisher does not exist' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
-      let(:message) { "Couldn't find Publisher with 'id'=#{invalid_id}" }
+      let(:id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Publisher with 'id'=#{id}" }
 
-      before { put publisher_path(invalid_id), params: params }
+      before { update_publisher }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
@@ -128,9 +131,10 @@ RSpec.describe 'Publishers', type: :request do
     end
 
     context 'with invalid params' do
+      let(:params) { {} }
       let(:message) { 'param is missing or the value is empty: publisher' }
 
-      before { put publisher_path(publisher.id), params: {} }
+      before { update_publisher }
 
       it 'is a bad request' do
         expect(response).to have_http_status :bad_request
@@ -139,10 +143,10 @@ RSpec.describe 'Publishers', type: :request do
     end
 
     context 'with invalid attributes' do
-      let(:invalid_attributes) { { publisher: { name: nil } } }
+      let(:params) { { publisher: { name: nil } } }
       let(:message) { "Validation failed: Name can't be blank" }
 
-      before { put publisher_path(publisher.id), params: invalid_attributes }
+      before { update_publisher }
 
       it 'is a unprocessable entity' do
         expect(response).to have_http_status :unprocessable_entity
