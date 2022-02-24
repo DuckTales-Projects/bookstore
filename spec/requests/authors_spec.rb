@@ -6,7 +6,7 @@ RSpec.describe 'Authors', type: :request do
   describe 'GET /authors' do
     subject(:get_index) { get authors_path }
 
-    context 'when author exist' do
+    context 'when author exists' do
       let(:author) { create(:author, name: 'Dan Brown') }
       let(:list) { create_list(:author, 9) }
 
@@ -23,10 +23,10 @@ RSpec.describe 'Authors', type: :request do
       end
     end
 
-    context 'when author not exist' do
+    context 'when author not exists' do
       before { get_index }
 
-      it 'must return a empty JSON' do
+      it 'must return an empty JSON' do
         expect(response).to have_http_status :ok
         expect(JSON(response.body).empty?).to eq true
       end
@@ -34,10 +34,13 @@ RSpec.describe 'Authors', type: :request do
   end
 
   describe 'GET /authors/:id' do
-    context 'when authors exist' do
-      let(:author) { create(:author, name: 'Alexandre Versignassi') }
+    subject(:get_author) { get author_path(id) }
 
-      before { get author_path(author.id) }
+    context 'when authors exists' do
+      let(:author) { create(:author, name: 'Alexandre Versignassi') }
+      let(:id) { author.id }
+
+      before { get_author }
 
       it 'returns the author' do
         expect(response).to have_http_status :ok
@@ -45,11 +48,11 @@ RSpec.describe 'Authors', type: :request do
       end
     end
 
-    context 'when authors not exist' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
-      let(:message) { "Couldn't find Author with 'id'=#{invalid_id}" }
+    context 'when authors not exists' do
+      let(:id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Author with 'id'=#{id}" }
 
-      before { get author_path(invalid_id) }
+      before { get_author }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
@@ -59,10 +62,12 @@ RSpec.describe 'Authors', type: :request do
   end
 
   describe 'POST /authors' do
+    subject(:create_author) { post authors_path, params: params }
+
     context 'when creating a new author' do
       let(:params) { { author: attributes_for(:author) } }
 
-      before { post authors_path, params: params }
+      before { create_author }
 
       it 'must return author' do
         expect(response).to have_http_status :created
@@ -71,10 +76,10 @@ RSpec.describe 'Authors', type: :request do
     end
 
     context 'when creating a new author with invalid attributes' do
-      let(:invalid_attributes) { { author: { name: nil } } }
+      let(:params) { { author: { name: nil } } }
       let(:message) { "Validation failed: Name can't be blank" }
 
-      before { post authors_path, params: invalid_attributes }
+      before { create_author }
 
       it 'is a unprocessable entity' do
         expect(response).to have_http_status :unprocessable_entity
@@ -83,7 +88,9 @@ RSpec.describe 'Authors', type: :request do
     end
 
     context 'when creating a new author with invalid params' do
-      before { post authors_path, params: {} }
+      let(:params) { {} }
+
+      before { create_author }
 
       it 'is a bad request' do
         expect(response).to have_http_status :bad_request
@@ -93,11 +100,14 @@ RSpec.describe 'Authors', type: :request do
   end
 
   describe 'PUT /authors/:id' do
+    subject(:update_author) { put author_path(id), params: params }
+
     let(:params) { { author: { name: 'George Orwell' } } }
     let(:author) { create(:author) }
+    let(:id) { author.id }
 
     context 'when authors exists' do
-      before { put author_path(author.id), params: params }
+      before { update_author }
 
       it 'updates the author' do
         author.reload
@@ -107,11 +117,11 @@ RSpec.describe 'Authors', type: :request do
       end
     end
 
-    context 'when authors does not exist' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
-      let(:message) { "Couldn't find Author with 'id'=#{invalid_id}" }
+    context 'when authors does not exists' do
+      let(:id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Author with 'id'=#{id}" }
 
-      before { put author_path(invalid_id), params: params }
+      before { update_author }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
@@ -120,9 +130,10 @@ RSpec.describe 'Authors', type: :request do
     end
 
     context 'with invalid params' do
+      let(:params) { {} }
       let(:message) { 'param is missing or the value is empty: author' }
 
-      before { put author_path(author.id), params: {} }
+      before { update_author }
 
       it 'is a bad request' do
         expect(response).to have_http_status :bad_request
@@ -131,10 +142,10 @@ RSpec.describe 'Authors', type: :request do
     end
 
     context 'with invalid attributes' do
-      let(:invalid_attributes) { { author: { name: nil } } }
+      let(:params) { { author: { name: nil } } }
       let(:message) { "Validation failed: Name can't be blank" }
 
-      before { put author_path(author.id), params: invalid_attributes }
+      before { update_author }
 
       it 'ia a unprocessable entity' do
         expect(response).to have_http_status :unprocessable_entity
@@ -144,10 +155,13 @@ RSpec.describe 'Authors', type: :request do
   end
 
   describe 'DELETE /authors/:id' do
-    context 'when author exist' do
-      let(:author) { create(:author) }
+    subject(:delete_author) { delete author_path(id) }
 
-      before { delete author_path(author.id) }
+    context 'when author exists' do
+      let(:author) { create(:author) }
+      let(:id) { author.id }
+
+      before { delete_author }
 
       it 'delete the author' do
         expect(response).to have_http_status :ok
@@ -155,11 +169,11 @@ RSpec.describe 'Authors', type: :request do
       end
     end
 
-    context 'when the author does not exist' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
-      let(:message) { "Couldn't find Author with 'id'=#{invalid_id}" }
+    context 'when the author does not exists' do
+      let(:id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Author with 'id'=#{id}" }
 
-      before { delete author_path(invalid_id) }
+      before { delete_author }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
