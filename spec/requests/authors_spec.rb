@@ -117,7 +117,7 @@ RSpec.describe 'Authors', type: :request do
       end
     end
 
-    context 'when authors does not exists' do
+    context 'when authors does not exist' do
       let(:id) { Faker::Number.within(range: 900..1000) }
       let(:message) { "Couldn't find Author with 'id'=#{id}" }
 
