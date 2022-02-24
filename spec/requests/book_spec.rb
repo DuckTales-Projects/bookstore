@@ -6,16 +6,7 @@ RSpec.describe 'Books', type: :request do
   describe 'GET /books' do
     subject(:get_index) { get books_path }
 
-    context 'when has no books' do
-      before { get_index }
-
-      it 'must return a empty JSON' do
-        expect(response).to have_http_status :ok
-        expect(JSON(response.body).empty?).to eq true
-      end
-    end
-
-    context 'when has books' do
+    context 'when books exits' do
       let(:books) { create_list(:book, 9) }
       let(:my_book) { create(:book, title: 'crash') }
 
@@ -27,21 +18,33 @@ RSpec.describe 'Books', type: :request do
 
       it 'returns all the books' do
         expect(response).to have_http_status :ok
-        expect(JSON.parse(response.body).size).to eq 10
-        expect(JSON.parse(response.body).last['title']).to eq 'crash'
+        expect(JSON(response.body).size).to eq 10
+        expect(JSON(response.body).last['title']).to eq 'crash'
+      end
+    end
+
+    context 'when books not exits' do
+      before { get_index }
+
+      it 'must return an empty JSON' do
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body).empty?).to eq true
       end
     end
   end
 
   describe 'GET /books/:id' do
-    context 'when there is a book' do
-      let(:my_book) { create(:book, title: 'Sem lama não há lótus') }
+    subject(:get_book) { get book_path(id) }
 
-      before { get book_path(my_book.id) }
+    context 'when books exits' do
+      let(:my_book) { create(:book, title: 'Sem lama não há lótus') }
+      let(:id) { my_book.id }
+
+      before { get_book }
 
       it 'return my book' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body)['id']).to eq my_book.id
+        expect(JSON(response.body)['id']).to eq id
         expect(JSON(response.body)['title']).to eq 'Sem lama não há lótus'
         expect(JSON(response.body)['genre']).to eq my_book.genre
         expect(JSON(response.body)['language']).to eq my_book.language
@@ -51,11 +54,11 @@ RSpec.describe 'Books', type: :request do
       end
     end
 
-    context 'when there is no book' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
-      let(:message) { "Couldn't find Book with 'id'=#{invalid_id}" }
+    context 'when books not exits' do
+      let(:id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Book with 'id'=#{id}" }
 
-      before { get book_path(invalid_id) }
+      before { get_book }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
@@ -65,21 +68,14 @@ RSpec.describe 'Books', type: :request do
   end
 
   describe 'POST /books' do
-    let(:author) { create(:author) }
-    let(:publisher) { create(:publisher) }
+    subject(:create_book) { post books_path, params: params }
 
     context 'when creating' do
-      let(:params) do
-        {
-          book: attributes_for(
-            :book,
-            author_id: author.id,
-            publisher_id: publisher.id
-          )
-        }
-      end
+      let(:author) { create(:author) }
+      let(:publisher) { create(:publisher) }
+      let(:params) { { book: attributes_for(:book, author_id: author.id, publisher_id: publisher.id) } }
 
-      before { post books_path, params: params }
+      before { create_book }
 
       it 'must return my book' do
         expect(response).to have_http_status :created
@@ -89,32 +85,39 @@ RSpec.describe 'Books', type: :request do
     end
 
     context 'when creating with invalid attributes' do
-      let(:invalid_attributes) { { book: attributes_for(:book) } }
+      let(:params) { { book: attributes_for(:book) } }
+      let(:message) { 'Validation failed: Author must exist, Publisher must exist' }
 
-      before { post books_path, params: invalid_attributes }
+      before { create_book }
 
       it 'is a unprocessable entity' do
         expect(response).to have_http_status :unprocessable_entity
-        expect(JSON(response.body)['message']).to eq 'Validation failed: Author must exist, Publisher must exist'
+        expect(JSON(response.body)['message']).to eq message
       end
     end
 
-    context 'when creating with empty attributes' do
-      before { post books_path, params: {} }
+    context 'when creating with invalid params' do
+      let(:params) { {} }
+      let(:message) { 'param is missing or the value is empty: book' }
+
+      before { create_book }
 
       it 'is a bad request' do
         expect(response).to have_http_status :bad_request
-        expect(JSON(response.body)['message']).to eq 'param is missing or the value is empty: book'
+        expect(JSON(response.body)['message']).to eq message
       end
     end
   end
 
   describe 'PUT /books/:id' do
+    subject(:update_book) { put book_path(id), params: params }
+
     let(:params) { { book: attributes_for(:book, title: '1984') } }
     let(:my_book) { create(:book) }
+    let(:id) { my_book.id }
 
-    context 'when book exist' do
-      before { put book_path(my_book.id), params: params }
+    context 'when book exists' do
+      before { update_book }
 
       it 'updates the book' do
         my_book.reload
@@ -124,11 +127,11 @@ RSpec.describe 'Books', type: :request do
       end
     end
 
-    context 'when book not exist' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
-      let(:message) { "Couldn't find Book with 'id'=#{invalid_id}" }
+    context 'when book not exists' do
+      let(:id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Book with 'id'=#{id}" }
 
-      before { get book_path(invalid_id), params: params }
+      before { update_book }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
@@ -137,10 +140,10 @@ RSpec.describe 'Books', type: :request do
     end
 
     context 'when invalid attributes' do
-      let(:invalid_attributes) { { book: attributes_for(:book, title: nil) } }
+      let(:params) { { book: attributes_for(:book, title: nil) } }
       let(:message) { "Validation failed: Title can't be blank" }
 
-      before { put book_path(my_book.id), params: invalid_attributes }
+      before { update_book }
 
       it 'is a unprocessable entity' do
         expect(response).to have_http_status :unprocessable_entity
@@ -148,21 +151,27 @@ RSpec.describe 'Books', type: :request do
       end
     end
 
-    context 'when creating with empty attributes' do
-      before { put book_path(my_book.id), params: {} }
+    context 'when creating with invalid params' do
+      let(:params) { {} }
+      let(:message) { 'param is missing or the value is empty: book' }
+
+      before { update_book }
 
       it 'is a bad request' do
         expect(response).to have_http_status :bad_request
-        expect(JSON(response.body)['message']).to eq 'param is missing or the value is empty: book'
+        expect(JSON(response.body)['message']).to eq message
       end
     end
   end
 
   describe 'DELETE /books/:id' do
-    context 'when book exist' do
-      let(:my_book) { create(:book) }
+    subject(:delete_book) { delete book_path(id) }
 
-      before { delete book_path(my_book.id) }
+    context 'when book exists' do
+      let(:my_book) { create(:book) }
+      let(:id) { my_book.id }
+
+      before { delete_book }
 
       it 'delete my book' do
         expect(response).to have_http_status :ok
@@ -170,11 +179,11 @@ RSpec.describe 'Books', type: :request do
       end
     end
 
-    context 'when book not exist' do
-      let(:invalid_id) { Faker::Number.within(range: 900..1000) }
-      let(:message) { "Couldn't find Book with 'id'=#{invalid_id}" }
+    context 'when book not exists' do
+      let(:id) { Faker::Number.within(range: 900..1000) }
+      let(:message) { "Couldn't find Book with 'id'=#{id}" }
 
-      before { delete book_path(invalid_id) }
+      before { delete_book }
 
       it 'is not found' do
         expect(response).to have_http_status :not_found
