@@ -3,9 +3,15 @@
 class PublishersController < ApplicationController
   def index
     Publisher.order(:id).page(params[:page]).then do |publishers|
-      page = publishers.size
+      page = params[:page].to_i
+      total_pages = Publisher.page(1).total_pages
       total_publishers = Publisher.all.size
-      render json: { list: publishers, pagination: "#{page} of #{total_publishers}" }, status: :ok
+
+      render json: {
+        list: publishers,
+        pagination: "#{page} of #{total_pages}",
+        total_publishers: total_publishers
+      }, status: :ok
     end
   end
 

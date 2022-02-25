@@ -3,9 +3,15 @@
 class BooksController < ApplicationController
   def index
     Book.order(:id).page(params[:page]).then do |books|
-      page = books.size
+      page = params[:page].to_i
+      total_pages = Book.page(1).total_pages
       total_books = Book.all.size
-      render json: { list: books, pagination: "#{page} of #{total_books}" }, status: :ok
+
+      render json: {
+        list: books,
+        pagination: "#{page} of #{total_pages}",
+        total_books: total_books
+      }, status: :ok
     end
   end
 
