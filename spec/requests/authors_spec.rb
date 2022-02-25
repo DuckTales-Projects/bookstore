@@ -18,8 +18,8 @@ RSpec.describe 'Authors', type: :request do
 
       it 'returns all the authors' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).size).to eq 10
-        expect(JSON(response.body).first['name']).to eq 'Dan Brown'
+        expect(JSON(response.body)['pagination']).to eq '10 of 10'
+        expect(JSON(response.body)['list'].first['name']).to eq 'Dan Brown'
       end
     end
 
@@ -28,7 +28,7 @@ RSpec.describe 'Authors', type: :request do
 
       it 'must return an empty JSON' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).empty?).to eq true
+        expect(JSON(response.body)['list'].empty?).to eq true
       end
     end
   end
