@@ -7,6 +7,7 @@ ruby '3.1.0'
 
 gem 'bootsnap', require: false
 gem 'dotenv-rails'
+gem 'kaminari'
 gem 'pg'
 gem 'puma'
 gem 'rails', github: 'rails/rails', branch: 'main'
