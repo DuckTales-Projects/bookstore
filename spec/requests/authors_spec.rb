@@ -18,7 +18,10 @@ RSpec.describe 'Authors', type: :request do
 
       it 'returns all the authors' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body)['pagination']).to eq '10 of 10'
+        expect(JSON(response.body).size).to eq 3
+        expect(JSON(response.body)['total_authors']).to eq 10
+        expect(JSON(response.body)['list'].size).to eq 10
+        expect(JSON(response.body)['pagination']).to eq '0 of 1'
         expect(JSON(response.body)['list'].first['name']).to eq 'Dan Brown'
       end
     end

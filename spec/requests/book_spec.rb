@@ -18,7 +18,10 @@ RSpec.describe 'Books', type: :request do
 
       it 'returns all the books' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body)['pagination']).to eq '10 of 10'
+        expect(JSON(response.body).size).to eq 3
+        expect(JSON(response.body)['total_books']).to eq 10
+        expect(JSON(response.body)['list'].size).to eq 10
+        expect(JSON(response.body)['pagination']).to eq '0 of 1'
         expect(JSON(response.body)['list'].last['title']).to eq 'crash'
       end
     end
