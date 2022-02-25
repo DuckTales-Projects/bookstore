@@ -2,8 +2,10 @@
 
 class AuthorsController < ApplicationController
   def index
-    Author.all.then do |author|
-      render json: author, status: :ok
+    Author.order(:id).page(params[:page]).then do |authors|
+      page = authors.size
+      total_authors = Author.all.size
+      render json: { list: authors, pagination: "#{page} of #{total_authors}" }, status: :ok
     end
   end
 

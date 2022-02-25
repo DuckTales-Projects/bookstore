@@ -2,8 +2,10 @@
 
 class PublishersController < ApplicationController
   def index
-    Publisher.all.then do |publisher|
-      render json: publisher, status: :ok
+    Publisher.order(:id).page(params[:page]).then do |publishers|
+      page = publishers.size
+      total_publishers = Publisher.all.size
+      render json: { list: publishers, pagination: "#{page} of #{total_publishers}" }, status: :ok
     end
   end
 
