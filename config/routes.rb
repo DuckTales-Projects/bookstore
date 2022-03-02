@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   concern :paginatable do
-    get '(page/:page)', action: :index, on: :collection, as: ''
+    get '(page/:page)', action: :index, on: :collection
   end
 
   resources :books, only: %i[index show create update destroy], concerns: :paginatable

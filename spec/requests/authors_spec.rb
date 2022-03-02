@@ -67,7 +67,7 @@ RSpec.describe 'Authors', type: :request do
 
       it 'must return an empty JSON' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body)['list'].empty?).to eq true
+        expect(JSON(response.body)['list'].empty?).to be true
       end
     end
   end
