@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 class PublishersController < ApplicationController
+  before_action :page_data, only: %i[index]
+
   def index
     Publisher.order(:id).page(params[:page]).then do |publishers|
-      page = params[:page].to_i
-      total_pages = Publisher.page(1).total_pages
-      total_publishers = Publisher.all.size
-
       render json: {
         list: publishers,
-        pagination: "#{page} of #{total_pages}",
-        total_publishers: total_publishers
+        pagination: "#{@page} of #{@total_pages}",
+        total_publishers: @total_publishers
       }, status: :ok
     end
   end
@@ -43,5 +41,11 @@ class PublishersController < ApplicationController
 
   def publisher_params
     params.require(:publisher).permit!
+  end
+
+  def page_data
+    @page = params[:page].to_i
+    @total_pages = Publisher.page(1).total_pages
+    @total_publishers = Publisher.all.size
   end
 end

@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
+  before_action :page_data, only: %i[index]
+
   def index
     Book.order(:id).page(params[:page]).then do |books|
-      page = params[:page].to_i
-      total_pages = Book.page(1).total_pages
-      total_books = Book.all.size
-
       render json: {
         list: books,
-        pagination: "#{page} of #{total_pages}",
-        total_books: total_books
+        pagination: "#{@page} of #{@total_pages}",
+        total_books: @total_books
       }, status: :ok
     end
   end
@@ -45,5 +43,11 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :genre, :language, :edition, :place, :year, :publisher_id, :author_id)
+  end
+
+  def page_data
+    @page = params[:page].to_i
+    @total_pages = Book.page(1).total_pages
+    @total_books = Book.all.size
   end
 end

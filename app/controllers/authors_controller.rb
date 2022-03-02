@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 class AuthorsController < ApplicationController
+  before_action :page_data, only: %i[index]
+
   def index
     Author.order(:id).page(params[:page]).then do |authors|
-      page = params[:page].to_i
-      total_pages = Author.page(1).total_pages
-      total_authors = Author.all.size
-
       render json: {
         list: authors,
-        pagination: "#{page} of #{total_pages}",
-        total_authors: total_authors
+        pagination: "#{@page} of #{@total_pages}",
+        total_authors: @total_authors
       }, status: :ok
     end
   end
@@ -43,5 +41,11 @@ class AuthorsController < ApplicationController
 
   def author_params
     params.require(:author).permit(:name)
+  end
+
+  def page_data
+    @page = params[:page].to_i
+    @total_pages = Author.page(1).total_pages
+    @total_authors = Author.all.size
   end
 end
