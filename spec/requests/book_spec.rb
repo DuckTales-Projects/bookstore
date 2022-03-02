@@ -4,14 +4,16 @@ require 'rails_helper'
 
 RSpec.describe 'Books', type: :request do
   describe 'GET /books' do
-    subject(:get_index) { get books_path }
+    subject(:get_index) { get books_path, params: page }
+
+    let(:page) { { page: 1 } }
 
     context 'when books exits' do
-      let(:books) { create_list(:book, 9) }
+      let(:list) { create_list(:book, 9) }
       let(:my_book) { create(:book, title: 'crash') }
 
       before do
-        books
+        list
         my_book
         get_index
       end
@@ -21,8 +23,42 @@ RSpec.describe 'Books', type: :request do
         expect(JSON(response.body).size).to eq 3
         expect(JSON(response.body)['total_books']).to eq 10
         expect(JSON(response.body)['list'].size).to eq 10
-        expect(JSON(response.body)['pagination']).to eq '0 of 1'
+        expect(JSON(response.body)['pagination']).to eq '1 of 1'
         expect(JSON(response.body)['list'].last['title']).to eq 'crash'
+      end
+    end
+
+    context 'when using pagination' do
+      let(:list) { create_list(:book, 55) }
+
+      let(:set_page2) do
+        page[:page] = 2
+        get_index
+      end
+
+      let(:set_page3) do
+        page[:page] = 3
+        get_index
+      end
+
+      before { list }
+
+      it 'with page 2' do
+        set_page2
+
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['total_books']).to eq 55
+        expect(JSON(response.body)['list'].size).to eq 25
+        expect(JSON(response.body)['pagination']).to eq '2 of 3'
+      end
+
+      it 'with page 3' do
+        set_page3
+
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body)['total_books']).to eq 55
+        expect(JSON(response.body)['list'].size).to eq 5
+        expect(JSON(response.body)['pagination']).to eq '3 of 3'
       end
     end
 
