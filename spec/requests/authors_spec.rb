@@ -4,11 +4,13 @@ require 'rails_helper'
 
 RSpec.describe 'Authors', type: :request do
   describe 'GET /authors' do
-    subject(:get_index) { get authors_path }
+    subject(:get_index) { get authors_path, params: page }
+
+    let(:page) { { page: 1 } }
 
     context 'when author exists' do
       let(:author) { create(:author, name: 'Dan Brown') }
-      let(:list) { create_list(:author, 9) }
+      let(:list) { create_list(:author, 4) }
 
       before do
         author
@@ -18,8 +20,36 @@ RSpec.describe 'Authors', type: :request do
 
       it 'returns all the authors' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).size).to eq 10
+        expect(JSON(response.body).size).to eq 5
         expect(JSON(response.body).first['name']).to eq 'Dan Brown'
+        expect(Author.page.total_pages).to eq 1
+      end
+    end
+
+    context 'when using pagination' do
+      let(:list) { create_list(:author, 11) }
+
+      def setpage(number)
+        page[:page] = number
+        list
+        get_index
+      end
+
+      it 'set page 1' do
+        setpage(1)
+
+        expect(page[:page]).to eq 1
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body).size).to eq 5
+        expect(Author.page.total_pages).to eq 3
+      end
+
+      it 'set page 3' do
+        setpage(3)
+
+        expect(page[:page]).to eq 3
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body).size).to eq 1
       end
     end
 
@@ -28,7 +58,7 @@ RSpec.describe 'Authors', type: :request do
 
       it 'must return an empty JSON' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).empty?).to eq true
+        expect(JSON(response.body).empty?).to be true
       end
     end
   end
