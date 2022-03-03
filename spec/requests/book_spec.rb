@@ -29,12 +29,6 @@ RSpec.describe 'Books', type: :request do
     context 'when using pagination' do
       let(:list) { create_list(:book, 11) }
 
-      def setpage(number)
-        page[:page] = number
-        list
-        get_index
-      end
-
       it 'set page 1' do
         setpage(1)
 
@@ -221,4 +215,10 @@ RSpec.describe 'Books', type: :request do
       end
     end
   end
+end
+
+def setpage(number)
+  page[:page] = number
+  list
+  get_index
 end
