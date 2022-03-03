@@ -4,10 +4,12 @@ require 'rails_helper'
 
 RSpec.describe 'Publishers', type: :request do
   describe 'GET /publishers' do
-    subject(:get_index) { get publishers_path }
+    subject(:get_index) { get publishers_path, params: page }
+
+    let(:page) { { page: 1 } }
 
     context 'when publisher exists' do
-      let(:list) { create_list(:publisher, 9) }
+      let(:list) { create_list(:publisher, 4) }
       let(:publisher) { create(:publisher, name: 'Pearson') }
 
       before do
@@ -18,8 +20,36 @@ RSpec.describe 'Publishers', type: :request do
 
       it 'returns all the publishers' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).size).to eq 10
+        expect(JSON(response.body).size).to eq 5
         expect(JSON(response.body).last['name']).to eq 'Pearson'
+        expect(Publisher.page.total_pages).to eq 1
+      end
+    end
+
+    context 'when using pagination' do
+      let(:list) { create_list(:publisher, 11) }
+
+      def setpage(number)
+        page[:page] = number
+        list
+        get_index
+      end
+
+      it 'set page 1' do
+        setpage(1)
+
+        expect(page[:page]).to eq 1
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body).size).to eq 5
+        expect(Publisher.page.total_pages).to eq 3
+      end
+
+      it 'set page 3' do
+        setpage(3)
+
+        expect(page[:page]).to eq 3
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body).size).to eq 1
       end
     end
 
@@ -28,7 +58,7 @@ RSpec.describe 'Publishers', type: :request do
 
       it 'must return a empty JSON' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).empty?).to eq true
+        expect(JSON(response.body).empty?).to be true
       end
     end
   end
