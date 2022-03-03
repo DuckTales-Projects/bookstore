@@ -4,10 +4,12 @@ require 'rails_helper'
 
 RSpec.describe 'Books', type: :request do
   describe 'GET /books' do
-    subject(:get_index) { get books_path }
+    subject(:get_index) { get books_path, params: page }
+
+    let(:page) { { page: 1 } }
 
     context 'when books exits' do
-      let(:books) { create_list(:book, 9) }
+      let(:books) { create_list(:book, 4) }
       let(:my_book) { create(:book, title: 'crash') }
 
       before do
@@ -18,8 +20,36 @@ RSpec.describe 'Books', type: :request do
 
       it 'returns all the books' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).size).to eq 10
+        expect(JSON(response.body).size).to eq 5
         expect(JSON(response.body).last['title']).to eq 'crash'
+        expect(Book.page.total_pages).to eq 1
+      end
+    end
+
+    context 'when using pagination' do
+      let(:list) { create_list(:book, 11) }
+
+      def setpage(number)
+        page[:page] = number
+        list
+        get_index
+      end
+
+      it 'set page 1' do
+        setpage(1)
+
+        expect(page[:page]).to eq 1
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body).size).to eq 5
+        expect(Book.page.total_pages).to eq 3
+      end
+
+      it 'set page 3' do
+        setpage(3)
+
+        expect(page[:page]).to eq 3
+        expect(response).to have_http_status :ok
+        expect(JSON(response.body).size).to eq 1
       end
     end
 
@@ -28,7 +58,7 @@ RSpec.describe 'Books', type: :request do
 
       it 'must return an empty JSON' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body).empty?).to eq true
+        expect(JSON(response.body).empty?).to be true
       end
     end
   end
