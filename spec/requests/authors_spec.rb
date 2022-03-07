@@ -61,14 +61,14 @@ RSpec.describe 'Authors', type: :request do
     subject(:get_author) { get author_path(id) }
 
     context 'when authors exists' do
-      let(:author) { create(:author, name: 'Alexandre Versignassi') }
+      let(:author) { create(:author, name: 'Alexandre') }
       let(:id) { author.id }
 
       before { get_author }
 
       it 'returns the author' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body)['name']).to eq 'Alexandre Versignassi'
+        expect(JSON(response.body)['name']).to eq 'Alexandre'
       end
     end
 
@@ -101,7 +101,7 @@ RSpec.describe 'Authors', type: :request do
 
     context 'when creating a new author with invalid attributes' do
       let(:params) { { author: { name: nil } } }
-      let(:message) { "Validation failed: Name can't be blank" }
+      let(:message) { "Validation failed: Name can't be blank, Name is too short (minimum is 3 characters)" }
 
       before { create_author }
 
@@ -167,7 +167,7 @@ RSpec.describe 'Authors', type: :request do
 
     context 'with invalid attributes' do
       let(:params) { { author: { name: nil } } }
-      let(:message) { "Validation failed: Name can't be blank" }
+      let(:message) { "Validation failed: Name can't be blank, Name is too short (minimum is 3 characters)" }
 
       before { update_author }
 
