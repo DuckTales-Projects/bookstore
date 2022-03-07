@@ -113,7 +113,7 @@ RSpec.describe 'Publishers', type: :request do
 
     context 'when creating a publisher with invalid attibutes' do
       let(:params) { { publisher: { name: nil } } }
-      let(:message) { "Validation failed: Name can't be blank" }
+      let(:message) { "Validation failed: Name can't be blank, Name is too short (minimum is 5 characters)" }
 
       before { create_publisher }
 
@@ -168,7 +168,7 @@ RSpec.describe 'Publishers', type: :request do
 
     context 'with invalid attributes' do
       let(:params) { { publisher: { name: nil } } }
-      let(:message) { "Validation failed: Name can't be blank" }
+      let(:message) { "Validation failed: Name can't be blank, Name is too short (minimum is 5 characters)" }
 
       before { update_publisher }
 
