@@ -165,7 +165,7 @@ RSpec.describe 'Books', type: :request do
 
     context 'when invalid attributes' do
       let(:params) { { book: attributes_for(:book, title: nil) } }
-      let(:message) { "Validation failed: Title can't be blank" }
+      let(:message) { "Validation failed: Title can't be blank, Title is too short (minimum is 2 characters)" }
 
       before { update_book }
 
