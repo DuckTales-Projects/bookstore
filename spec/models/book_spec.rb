@@ -37,18 +37,19 @@ RSpec.describe Book, type: :model do
     context 'when the book has the invalid attributes' do
       let(:long_str) { Faker::Name.initials(number: 51) }
       let(:invalid_year) { [rand(0..1499), rand(Date.current.year.next..3000)].sample }
+      let(:errors_message) { ['is too long (maximum is 50 characters)'] }
 
       before do
         book.update(title: long_str, genre: long_str, edition: long_str, place: long_str, year: invalid_year)
       end
 
       it 'generates the following errors' do
-        expect(book.errors.messages[:title]).to eq ['is too long (maximum is 50 characters)']
-        expect(book.errors.messages[:genre]).to eq ['is too long (maximum is 50 characters)']
-        expect(book.errors.messages[:edition]).to eq ['is too long (maximum is 50 characters)']
-        expect(book.errors.messages[:place]).to eq ['is too long (maximum is 50 characters)']
-        expect(book.errors.messages[:year]).to eq ['must be in 1500..2022']
         expect(book.valid?).to be false
+        expect(book.errors.messages[:title]).to eq errors_message
+        expect(book.errors.messages[:genre]).to eq errors_message
+        expect(book.errors.messages[:edition]).to eq errors_message
+        expect(book.errors.messages[:place]).to eq errors_message
+        expect(book.errors.messages[:year]).to eq ["must be in 1500..#{Date.current.year}"]
       end
     end
 
@@ -57,9 +58,8 @@ RSpec.describe Book, type: :model do
       let(:error1) { "can't be blank, is too short (minimum is 2 characters)" }
       let(:error2) { "is not a number, can't be blank" }
 
-      before { book.save }
-
       it 'generates the following errors' do
+        expect(book.valid?).to be false
         expect(book.errors.messages[:title].join(', ')).to eq error1
         expect(book.errors.messages[:genre].join(', ')).to eq error1
         expect(book.errors.messages[:edition].join(', ')).to eq error1
@@ -68,7 +68,6 @@ RSpec.describe Book, type: :model do
         expect(book.errors.messages[:publisher].join).to eq 'must exist'
         expect(book.errors.messages[:author].join).to eq 'must exist'
         expect(book.errors.messages[:year].join(', ')).to eq error2
-        expect(book.valid?).to be false
       end
     end
   end
