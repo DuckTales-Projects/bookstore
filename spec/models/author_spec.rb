@@ -28,13 +28,12 @@ RSpec.describe Author, type: :model do
       let(:long_str) { Faker::Name.initials(number: 21) }
 
       before do
-        author.name = long_str
-        author.save
+        author.update(name: long_str)
       end
 
       it 'generates the following errors' do
-        expect(author.errors.messages[:name]).to eq ['is too long (maximum is 20 characters)']
         expect(author.valid?).to be false
+        expect(author.errors.messages[:name]).to eq ['is too long (maximum is 20 characters)']
       end
     end
 
@@ -42,11 +41,9 @@ RSpec.describe Author, type: :model do
       let(:author) { described_class.new }
       let(:error) { "can't be blank, is too short (minimum is 3 characters)" }
 
-      before { author.save }
-
       it 'generates the following errors' do
-        expect(author.errors.messages[:name].join(', ')).to eq error
         expect(author.valid?).to be false
+        expect(author.errors.messages[:name].join(', ')).to eq error
       end
     end
   end
