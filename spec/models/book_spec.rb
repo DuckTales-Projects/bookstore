@@ -36,15 +36,10 @@ RSpec.describe Book, type: :model do
 
     context 'when the book has the invalid attributes' do
       let(:long_str) { Faker::Name.initials(number: 51) }
-      let(:invalid_year) { [rand(2..1499), rand((Time.zone.now.year + 1)..3000)].sample }
+      let(:invalid_year) { [rand(0..1499), rand(Date.current.year.next..3000)].sample }
 
       before do
-        book.title = long_str
-        book.genre = long_str
-        book.edition = long_str
-        book.place = long_str
-        book.year = invalid_year
-        book.save
+        book.update(title: long_str, genre: long_str, edition: long_str, place: long_str, year: invalid_year)
       end
 
       it 'generates the following errors' do
