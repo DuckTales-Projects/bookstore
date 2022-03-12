@@ -9,6 +9,6 @@ FactoryBot.define do
     language { %w[portuguese english spanish].sample }
     edition { ['first edition', 'second edition', 'third edition'].sample }
     place { Faker::Nation.nationality }
-    year { Faker::Number.within(range: 1900..Time.zone.now.year) }
+    year { Faker::Number.within(range: 1900..Date.current.year) }
   end
 end
