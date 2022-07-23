@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: FAlibrary_development
+  database: bookstore_development
 
 test:
   <<: *default
-  database: FAlibrary_test
+  database: bookstore_test
 
 production:
   <<: *default
-  database: FAlibrary_production
+  database: bookstore_production
