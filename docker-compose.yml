@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
+
+  server:
+    build: .
+    container_name: bookstore
+    hostname: bookstore
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      - BUNDLE_PATH=vendor/bundle
+      - BUNDLE_DISABLE_SHARED_GEMS=1
+    working_dir: /var/www/bookstore
+    volumes:
+      - .:/var/www/bookstore:Z
+    command: >
+      bash -c "bin/rails db:create db:migrate
+      && bundle exec rails s -b 0.0.0.0"
+    depends_on:
+      - db
+
+networks:
+  default:
+      name: library_app
