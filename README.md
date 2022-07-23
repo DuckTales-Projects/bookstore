@@ -1,15 +1,6 @@
-# First API: Library
+# BookStore
 
-[![codecov](https://codecov.io/gh/DuckTales-Projects/FA_library/branch/development/graph/badge.svg?token=PAKYJ5B96U)](https://codecov.io/gh/DuckTales-Projects/FA_library)
-[![codebeat badge](https://codebeat.co/badges/f6515d51-80f0-4f6e-bcea-490713045d6a)](https://codebeat.co/projects/github-com-ducktales-projects-fa_library-development)
-![code_analizers](https://github.com/DuckTales-Projects/FA_library/actions/workflows/code_analyzers.yml/badge.svg)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DuckTales-Projects_FA_library&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=DuckTales-Projects_FA_library)
-
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=DuckTales-Projects_FA_library&metric=bugs)](https://sonarcloud.io/summary/new_code?id=DuckTales-Projects_FA_library)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DuckTales-Projects_FA_library&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DuckTales-Projects_FA_library)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DuckTales-Projects_FA_library&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DuckTales-Projects_FA_library)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=DuckTales-Projects_FA_library&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=DuckTales-Projects_FA_library)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=DuckTales-Projects_FA_library&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=DuckTales-Projects_FA_library)
+[![codecov](https://codecov.io/gh/DuckTales-Projects/bookstore/branch/development/graph/badge.svg?token=PAKYJ5B96U)](https://codecov.io/gh/DuckTales-Projects/bookstore) [![codebeat badge](https://codebeat.co/badges/f6515d51-80f0-4f6e-bcea-490713045d6a)](https://codebeat.co/projects/github-com-ducktales-projects-bookstore-development)  ![code_analizers](https://github.com/DuckTales-Projects/bookstore/actions/workflows/code_analyzers.yml/badge.svg)
 
 The objective of this project is to test my knowledge, it is an API where it is possible to register and consult a list of books, authors and publishers.
 
@@ -35,9 +26,9 @@ alias postgres_up='docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgre
 clone this project:
 
 ```sh
-git clone https://github.com/DuckTales-Projects/FA_library.git
+git clone https://github.com/DuckTales-Projects/bookstore.git
 
-cd FA_library
+cd bookstore
 
 gem install bundler         # => install bundler
 
