@@ -1,0 +1,10 @@
+#!/usr/bin/env
+
+zsh script/clean
+echo
+echo 'build'
+docker-compose build
+rm -f tmp/pids/server.pid
+echo
+echo 'starting'
+docker-compose up -d

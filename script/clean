@@ -1,0 +1,7 @@
+#!/usr/bin/env
+
+echo 'cleaning up...'
+echo
+docker rm -f $(docker ps -a -q)
+echo
+echo 'cleaning completed'
