@@ -1,6 +1,6 @@
-#!/usr/bin/env
+#!/bin/bash
 
-zsh script/clean
+script/clean
 echo
 echo 'build'
 docker-compose build

@@ -1,5 +1,0 @@
-#!/usr/bin/env
-
-zsh script/validate
-
-docker-compose run server zsh

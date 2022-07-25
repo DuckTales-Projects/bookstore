@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/bin/bash
 
 echo 'cleaning up...'
 echo

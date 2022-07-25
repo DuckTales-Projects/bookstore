@@ -1,8 +1,8 @@
-#!/usr/bin/env
+#!/bin/bash
 
 CONTAINER_CREATED=$(docker ps --filter "name=bookstore" --format "{{.Names}}")
 
 if [[ "$CONTAINER_CREATED" == "" ]]; then
     echo "Server was not running."
-    zsh script/run
+    script/run
 fi

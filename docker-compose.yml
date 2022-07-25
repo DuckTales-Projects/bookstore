@@ -30,7 +30,3 @@ services:
       && bundle exec rails s -b 0.0.0.0"
     depends_on:
       - db
-
-networks:
-  default:
-      name: library_app

@@ -10,12 +10,10 @@ The objective of this project is to test my knowledge, it is an API where it is 
 if you are not going to use docker:
 * Ruby 3.1.0
 * PostgreSQL
-* zsh
 
 if you are going to use docker:
 * Docker
 * Docker-compose
-* zsh
 ```
 
 ## Usage
@@ -53,9 +51,9 @@ git clone https://github.com/DuckTales-Projects/bookstore.git
 
 cd bookstore     # => enter the projector directory
 
-zsh script/run   # => to build, run docker images and run the server
+script/run   # => to build, run docker images and run the server
 
-zsh script/zsh   # => to run shell in container
+script/shell   # => to run shell in container
 
 # inside the container
 be rspec         # => Same as "bundle exec rspec" (run tests)

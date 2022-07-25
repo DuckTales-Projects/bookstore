@@ -1,0 +1,5 @@
+#!/bin/bash
+
+script/validate
+
+docker-compose run server zsh
