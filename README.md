@@ -6,47 +6,71 @@ The objective of this project is to test my knowledge, it is an API where it is 
 
 ## System dependencies
 
-```markdown
-* Ruby version      - version 3.1.0
-* Rails version     - version 7.1.0.alpha
-* RSpec version     - version 3.11.0.pre
-* Rubocop version   - version 1.24.1
+```text
+if you are not going to use docker:
+* Ruby 3.1.0
+* PostgreSQL
+* zsh
+
+if you are going to use docker:
+* Docker
+* Docker-compose
+* zsh
 ```
 
 ## Usage
 
-Install and configure the database: [PostgreSQL](https://www.postgresql.org/)
+### If you are not going to use docker:
 
-if you have docker configured and installed, you can use this alias to upload its image:
+First install and configure the database ([PostgreSQL](https://www.postgresql.org/)).
 
 ```sh
-alias postgres_up='docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres'
+# clone the project
+git clone https://github.com/DuckTales-Projects/bookstore.git
+
+cd bookstore           # => enter the projector directory
+
+gem install bundler    # => install bundler
+
+bundle install         # => install gems
+
+bin/rails db:prepare   # => prepare the database
+
+bundle exec rspec      # => to run the tests
+
+bin/rails s            # => to start server
+
+bin/rails c            # => to start console
 ```
 
-clone this project:
+### If you are going to use docker:
+
+With dependencies satisfied, run the following commands:
 
 ```sh
 git clone https://github.com/DuckTales-Projects/bookstore.git
 
 cd bookstore
 
-gem install bundler         # => install bundler
+zsh script/run   # => to build, run docker images and run the server
 
-bundle install              # => install project dependencies
+zsh script/zsh   # => to run shell in container
 
-bin/rails db:create db:migrate   # => prepare the database
+# inside the container
+be rspec         # => Same as "bundle exec rspec" (run tests)
 
-bin/rails s                     # => start server
+bin/rails c      # => start console
 
-bin/rails c                     # => start console
-
-bundle exec rspec           # => to run the tests
 ```
 
-start the server and access the url: <http://localhost:3000>
+## Accessing the application
 
-## future updates
+Run the server, open the browser and access `http://localhost:3000/`.
 
-```markdown
-- the api will be able to listen for http calls, process and return a json
-```
+You should see the following screen:
+
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/60988594/180815904-5c68b7b4-f13f-4438-9737-54f6f4432a13.png" alt="Welcome screen" height="300" width="380"/>
+</p>
+
+Access API [documentation](https://github.com/DuckTales-Projects/bookstore/edit/dockerization/README.md#accessing-the-application) to find out how to make requests. (Under construction)
