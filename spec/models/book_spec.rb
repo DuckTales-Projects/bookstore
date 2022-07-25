@@ -7,7 +7,6 @@ RSpec.describe Book, type: :model do
 
   describe 'Rails validations' do
     context 'when validations are needed' do
-      it { is_expected.to define_enum_for(:language).with_values(portuguese: 0, english: 1, spanish: 2) }
       it { is_expected.to validate_presence_of(:title) }
       it { is_expected.to validate_presence_of(:genre) }
       it { is_expected.to validate_presence_of(:language) }

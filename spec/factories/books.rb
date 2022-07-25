@@ -6,7 +6,7 @@ FactoryBot.define do
     author
     publisher
     genre { Faker::Book.genre }
-    language { %w[portuguese english spanish].sample }
+    language { Faker::Nation.language }
     edition { ['first edition', 'second edition', 'third edition'].sample }
     place { Faker::Nation.nationality }
     year { Faker::Number.within(range: 1900..Date.current.year) }
