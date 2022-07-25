@@ -74,4 +74,4 @@ You should see the following screen:
   <img src="https://user-images.githubusercontent.com/60988594/180815904-5c68b7b4-f13f-4438-9737-54f6f4432a13.png" alt="Welcome screen" height="300" width="380"/>
 </p>
 
-Access API [documentation](https://github.com/DuckTales-Projects/bookstore/edit/dockerization/README.md#accessing-the-application) to find out how to make requests. (Under construction)
+Access API [documentation](https://github.com/DuckTales-Projects/bookstore/blob/main/README.md#accessing-the-application) to find out how to make requests. (Under construction)
