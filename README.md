@@ -48,9 +48,10 @@ bin/rails c            # => to start console
 With dependencies satisfied, run the following commands:
 
 ```sh
+# clone the project
 git clone https://github.com/DuckTales-Projects/bookstore.git
 
-cd bookstore
+cd bookstore     # => enter the projector directory
 
 zsh script/run   # => to build, run docker images and run the server
 
