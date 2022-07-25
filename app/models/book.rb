@@ -10,10 +10,4 @@ class Book < ApplicationRecord
             :genre,
             :edition,
             :place, presence: true, length: { in: 2..50 }
-
-  enum language: {
-    portuguese: 0,
-    english: 1,
-    spanish: 2
-  }
 end
