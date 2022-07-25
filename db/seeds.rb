@@ -1,9 +1,21 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+puts '---------------------------------------'
+puts 'Start "seeds"'
+puts '---------------------------------------'
+
+puts '---------- creating Authors -----------'
+author = FactoryBot.create(:author, name: 'Neil Gaiman')
+FactoryBot.create_list(:author, 3)
+
+puts '---------- creating Publishers --------'
+publisher = FactoryBot.create(:publisher, name: 'Intrínseca')
+FactoryBot.create_list(:publisher, 3)
+
+puts '---------- creating Books -------------'
+book = FactoryBot.create(:book, title: 'Mitologia Nórdica', genre: 'Mito', place: 'Brasil', language: 'portuguese')
+FactoryBot.create_list(:book, 3)
+
+puts '---------------------------------------'
+puts 'Finished "seeds"'
+puts '---------------------------------------'
