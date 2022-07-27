@@ -1,6 +1,6 @@
 # BookStore
 
-[![codecov](https://codecov.io/gh/DuckTales-Projects/bookstore/branch/development/graph/badge.svg?token=PAKYJ5B96U)](https://codecov.io/gh/DuckTales-Projects/bookstore) [![codebeat badge](https://codebeat.co/badges/f6515d51-80f0-4f6e-bcea-490713045d6a)](https://codebeat.co/projects/github-com-ducktales-projects-bookstore-development)  ![code_analizers](https://github.com/DuckTales-Projects/bookstore/actions/workflows/code_analyzers.yml/badge.svg)
+[![codecov](https://codecov.io/gh/DuckTales-Projects/bookstore/branch/development/graph/badge.svg?token=PAKYJ5B96U)](https://codecov.io/gh/DuckTales-Projects/bookstore) [![codebeat badge](https://codebeat.co/badges/c1a21c26-1d5f-4b56-bd7b-6b63d4268837)](https://codebeat.co/projects/github-com-ducktales-projects-bookstore-main) ![code_analizers](https://github.com/DuckTales-Projects/bookstore/actions/workflows/code_analyzers.yml/badge.svg)
 
 The objective of this project is to test my knowledge, it is an API where it is possible to register and consult a list of books, authors and publishers.
 
