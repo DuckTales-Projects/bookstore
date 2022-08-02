@@ -21,6 +21,9 @@ RSpec.describe 'Authors', type: :request do
       it 'returns all the authors' do
         expect(response).to have_http_status :ok
         expect(JSON(response.body).size).to eq 5
+        expect(JSON(response.body).first.keys.size).to eq 1
+        expect(JSON(response.body).first.keys).not_to include 'created_at'
+        expect(JSON(response.body).first.keys).not_to include 'updated_at'
         expect(JSON(response.body).first['name']).to eq 'Dan Brown'
         expect(Author.page.total_pages).to eq 1
       end
