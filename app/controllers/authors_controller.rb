@@ -2,9 +2,7 @@
 
 class AuthorsController < ApplicationController
   def index
-    Author.order(:id).page(params[:page]).then do |author|
-      render json: author, status: :ok
-    end
+    @authors = Author.order(:id).page(params[:page])
   end
 
   def show

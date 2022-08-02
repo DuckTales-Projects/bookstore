@@ -2,9 +2,7 @@
 
 class PublishersController < ApplicationController
   def index
-    Publisher.order(:id).page(params[:page]).then do |publisher|
-      render json: publisher, status: :ok
-    end
+    @publishers = Publisher.order(:id).page(params[:page])
   end
 
   def show
