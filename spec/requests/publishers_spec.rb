@@ -21,6 +21,9 @@ RSpec.describe 'Publishers', type: :request do
       it 'returns all the publishers' do
         expect(response).to have_http_status :ok
         expect(JSON(response.body).size).to eq 5
+        expect(JSON(response.body).first.keys.size).to eq 1
+        expect(JSON(response.body).first.keys).not_to include 'created_at'
+        expect(JSON(response.body).first.keys).not_to include 'updated_at'
         expect(JSON(response.body).last['name']).to eq 'Pearson'
         expect(Publisher.page.total_pages).to eq 1
       end
