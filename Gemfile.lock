@@ -125,6 +125,9 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     json (2.6.2)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
@@ -257,6 +260,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  jbuilder
   kaminari
   pg
   pry-byebug
