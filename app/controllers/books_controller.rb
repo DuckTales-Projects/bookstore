@@ -2,9 +2,7 @@
 
 class BooksController < ApplicationController
   def index
-    Book.order(:id).page(params[:page]).then do |list|
-      render json: list, status: :ok
-    end
+    @books = Book.order(:id).page(params[:page])
   end
 
   def show
