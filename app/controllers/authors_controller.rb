@@ -6,9 +6,7 @@ class AuthorsController < ApplicationController
   end
 
   def show
-    Author.find(params[:id]).then do |author|
-      render json: author, status: :ok
-    end
+    @author = Author.find(params[:id])
   end
 
   def create
