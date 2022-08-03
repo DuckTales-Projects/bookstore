@@ -12,10 +12,6 @@ gem 'kaminari'
 gem 'pg'
 gem 'puma'
 gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rubocop'
-gem 'rubocop-performance'
-gem 'rubocop-rails'
-gem 'rubocop-rspec'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
@@ -24,6 +20,10 @@ group :development, :test do
   gem 'faker'
   gem 'pry-byebug'
   gem 'rspec-rails'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
   gem 'shoulda-matchers'
   gem 'simplecov'
 end
