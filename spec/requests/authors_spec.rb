@@ -71,6 +71,9 @@ RSpec.describe 'Authors', type: :request do
 
       it 'returns the author' do
         expect(response).to have_http_status :ok
+        expect(JSON(response.body).keys.size).to eq 1
+        expect(JSON(response.body).keys).not_to include 'created_at'
+        expect(JSON(response.body).keys).not_to include 'updated_at'
         expect(JSON(response.body)['name']).to eq 'Alexandre'
       end
     end
