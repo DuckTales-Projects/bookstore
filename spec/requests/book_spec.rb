@@ -71,7 +71,9 @@ RSpec.describe 'Books', type: :request do
 
       it 'return my book' do
         expect(response).to have_http_status :ok
-        expect(JSON(response.body)['id']).to eq id
+        expect(JSON(response.body).keys.size).to eq 8
+        expect(JSON(response.body).keys).not_to include 'created_at'
+        expect(JSON(response.body).keys).not_to include 'updated_at'
         expect(JSON(response.body)['title']).to eq 'Sem lama não há lótus'
         expect(JSON(response.body)['genre']).to eq my_book.genre
         expect(JSON(response.body)['language']).to eq my_book.language
