@@ -277,17 +277,14 @@
 ```json
 [
   {
-    "id": 1,
     "title": "Mitologia Nórdica",
     "genre": "Mito",
     "language": "0",
     "edition": "second edition",
     "place": "Brasil",
     "year": 1972,
-    "created_at": "2022-07-25T21:35:25.863Z",
-    "updated_at": "2022-07-25T21:35:25.863Z",
-    "author_id": 1,
-    "publisher_id": 1
+    "author": "Neil Gaiman",
+    "publisher": "Intrínseca"
   }
 ]
 
@@ -338,16 +335,10 @@ Each page displays 5 objects, if there are not enough objects to be displayed on
 ```json
 [
   {
-    "id": 1,
-    "name": "Neil Gaiman",
-    "created_at": "2022-07-25T21:35:09.362Z",
-    "updated_at": "2022-07-25T21:35:09.362Z"
+    "name": "Neil Gaiman"
   },
   {
-    "id": 2,
-    "name": "Hermiston",
-    "created_at": "2022-07-25T21:35:09.702Z",
-    "updated_at": "2022-07-25T21:35:09.702Z"
+    "name": "Hermiston"
   }
 ]
 
@@ -398,16 +389,10 @@ Each page displays 5 objects, if there are not enough objects to be displayed on
 ```json
 [
   {
-    "id": 1,
-    "name": "Intrínseca",
-    "created_at": "2022-07-25T21:35:09.731Z",
-    "updated_at": "2022-07-25T21:35:09.731Z"
+    "name": "Intrínseca"
   },
   {
-    "id": 2,
-    "name": "Bosco Inc",
-    "created_at": "2022-07-25T21:35:09.740Z",
-    "updated_at": "2022-07-25T21:35:09.740Z"
+    "name": "Bosco Inc"
   }
 ]
 
@@ -449,17 +434,14 @@ Each page displays 5 objects, if there are not enough objects to be displayed on
 
 ```json
 {
-  "id": 1,
   "title": "Mitologia Nórdica",
   "genre": "Mito",
   "language": "0",
   "edition": "second edition",
   "place": "Brasil",
   "year": 1972,
-  "created_at": "2022-07-25T21:35:25.863Z",
-  "updated_at": "2022-07-25T21:35:25.863Z",
-  "author_id": 1,
-  "publisher_id": 1
+  "author": "Neil Gaiman",
+  "publisher": "Intrínseca"
 }
 
 ```
@@ -502,10 +484,7 @@ If the id provided does not match any registered object you will see something l
 
 ```json
 {
-  "id": 1,
-  "name": "Neil Gaiman",
-  "created_at": "2022-07-25T21:35:09.362Z",
-  "updated_at": "2022-07-25T21:35:09.362Z"
+  "name": "Neil Gaiman"
 }
 
 ```
@@ -548,10 +527,7 @@ If the id provided does not match any registered object you will see something l
 
 ```json
 {
-  "id": 1,
-  "name": "Intrínseca",
-  "created_at": "2022-07-25T21:35:09.731Z",
-  "updated_at": "2022-07-25T21:35:09.731Z"
+  "name": "Intrínseca"
 }
 
 ```
