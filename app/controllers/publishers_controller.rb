@@ -6,9 +6,7 @@ class PublishersController < ApplicationController
   end
 
   def show
-    Publisher.find(params[:id]).then do |publisher|
-      render json: publisher, status: :ok
-    end
+    @publisher = Publisher.find(params[:id])
   end
 
   def create
