@@ -35,6 +35,11 @@ jobs:
           cp config/database.yml.github config/database.yml
           bundle exec bin/rails db:drop db:create db:migrate
 
+      - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          
       - name: Run tests with RSpec
         env:
           RAILS_ENV: test
